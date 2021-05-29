@@ -51,8 +51,11 @@ jobs:
           #!/bin/bash
           cd ~/Monitor
           echo "install python ..."
-          sudo yum install python3-pip
-          sudo yum install python3-venv
+          sudo apt install python3 
+          python3 ––version
+          sudo apt install python3-pip
+          pip3 --version
+          sudo apt install python3-venv
           echo "create vertial enviroment ..."
           python3 -m venv venv
           source venv/bin/activate
