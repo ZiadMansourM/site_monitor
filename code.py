@@ -28,6 +28,7 @@ try:
     if r.status_code != 200:
         notify_user()
     else:
+        notify_user()
         print("Success: Up and running ...")
 except Exception as e:
     notify_user()
