@@ -50,7 +50,16 @@ jobs:
           cat >>~/Testing.sh<<END
           #!/bin/bash
           cd ~/Monitor
-          ls
+          echo "install python ..."
+          sudo yum install python3-pip
+          sudo yum install python3-venv
+          echo "create vertial enviroment ..."
+          python3 -m venv venv
+          source venv/bin/activate
+          echo "install dependancies"
+          pip install -r requirements.txt
+          echo "run code ..."
+          python3 code.py
           END
           chmod +x ~/Testing.sh
       
