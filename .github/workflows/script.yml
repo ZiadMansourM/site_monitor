@@ -1,0 +1,54 @@
+# This is a basic monitoring script for a website
+# by: Ziad Mansour Mohamed
+
+name: SiteMonitor
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow every 10 min
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # minute (0 - 59) | hour (0 - 23) | day of the month (1 - 31) | month (1 - 12 or JAN-DEC) | day of the week (0 - 6 or SUN-SAT)
+    - cron:  '*/5 * * * *'
+
+jobs:
+  # This workflow contains a Two jobs called "PING - ALERT"
+
+
+  # First Job
+  PING:
+    name: "Run Tests on code"
+    # The Runner would run on the latest version of ubuntu server
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Task[1]: Get Clone Key on the Runner
+      - name: Prepare the Clone Key on the runner && clone
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_Clone_KEY" > ~/.ssh/Clone.key
+          chmod 600 ~/.ssh/Clone.key
+          sudo cat >>~/.ssh/config <<END
+            Host MonitorRepo
+            Hostname github.com
+            User git
+            IdentityFile ~/.ssh/Clone.key
+          END
+          git clone MonitorRepo:ZiadMansourM/site_monitor.git ~/Monitor
+        env:
+          SSH_Clone_KEY: ${{ secrets.SSH_Monitor_Clone_KEY }}
+      
+      # Task[2]: create bach scripts to ease Testing
+      - name: Creat Testing.sh scripts
+        run: |
+          cat >>~/Testing.sh<<END
+          #!/bin/bash
+          cd ~/Monitor
+          ls
+          END
+          chmod +x ~/Testing.sh
+      
+      # Task[3]: Run testing scripts Scripts
+      - name: Run Testing.sh scripts
+        run: ~/Testing.sh
