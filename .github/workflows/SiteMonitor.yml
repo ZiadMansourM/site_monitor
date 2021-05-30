@@ -73,4 +73,4 @@ jobs:
         env: 
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        run: python3 code.py
+        run: python3 ~/Monitor/code.py
