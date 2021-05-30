@@ -2,8 +2,8 @@ import requests
 import smtplib
 
 
-EMAIL_ADDRESS = 'noreply@thealphaflickr.xyz'
-EMAIL_PASSWORD = '36Q?Zk.GnFz@cWn'
+EMAIL_ADDRESS = ${{ secrets.EMAIL_ADDRESS }}
+EMAIL_PASSWORD = ${{ secrets.EMAIL_PASSWORD }}
 
 
 def notify_user():
