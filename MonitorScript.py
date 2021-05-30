@@ -7,6 +7,7 @@ EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 recipients = [os.environ.get("DEVOPS_EMAIL"), os.environ.get("TEAM_LEADER_EMAIL")]
 
+
 def notify_user():
     with smtplib.SMTP('smtp.zoho.com', 587) as smtp:
         smtp.ehlo()
@@ -20,7 +21,7 @@ def notify_user():
         msg = f'Subject: {subject}\n\n{body}'
 
         # logging.info('Sending Email...')
-        smtp.sendmail(EMAIL_ADDRESS, , msg)
+        smtp.sendmail(EMAIL_ADDRESS, recipients, msg)
 
 
 try:
