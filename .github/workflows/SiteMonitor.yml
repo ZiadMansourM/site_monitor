@@ -44,10 +44,10 @@ jobs:
         env:
           SSH_Clone_KEY: ${{ secrets.SSH_Monitor_Clone_KEY }}
       
-      # Task[2]: create bach scripts to ease Testing
-      - name: Creat Testing.sh scripts
+      # Task[2]: create bach scripts to ease Setting the Enviroment
+      - name: Creat SetEnviroment.sh scripts
         run: |
-          cat >>~/Testing.sh<<END
+          cat >>~/SetEnviroment.sh<<END
           #!/bin/bash
           cd ~/Monitor
           echo "install python ..."
@@ -61,11 +61,16 @@ jobs:
           source venv/bin/activate
           echo "install dependancies"
           pip install -r requirements.txt
-          echo "run code ..."
-          python3 code.py
           END
-          chmod +x ~/Testing.sh
+          chmod +x ~/SetEnviroment.sh
       
-      # Task[3]: Run testing scripts Scripts
-      - name: Run Testing.sh scripts
+      # Task[3]: Run SetEnviroment script
+      - name: Run SetEnviroment.sh scripts
         run: ~/Testing.sh
+        
+      # Task[4]: Run MonitScript.py
+      - name: execute .py script
+        env: 
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        run: python3 code.py
