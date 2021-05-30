@@ -73,4 +73,6 @@ jobs:
         env: 
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          DEVOPS_EMAIL: ${{ secrets.DEVOPS_EMAIL }}
+          TEAM_LEADER_EMAIL: ${{ secrets.TEAM_LEADER_EMAIL }}
         run: python3 ~/Monitor/MonitorScript.py
